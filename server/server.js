@@ -11,6 +11,10 @@ const express = require('express')
 app.use(bodyParser.json());
 app.use(cors());
 
+massive(process.env.CONNECTIONSTRING).then(db => {
+    app.set('db', db);
+}).catch(console.error);
+
 const db = app.get('db');
 
 app.listen(port, () => {
